@@ -152,3 +152,53 @@ exports.listProjects = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+exports.bulkClear = async (req, res) => {
+  try {
+    const { clearProjects, clearNotifications, clearPinnedProjects } = req.body;
+    
+    const results = {
+      projects: { deleted: 0 },
+      notifications: { deleted: 0 },
+      pinnedProjects: { deleted: 0 }
+    };
+
+    // Clear projects if requested
+    if (clearProjects === true) {
+      const projectResult = await Project.deleteMany({});
+      results.projects.deleted = projectResult.deletedCount;
+    }
+
+    // Clear notifications if requested
+    if (clearNotifications === true) {
+      const Notification = require("../models/notification");
+      const notificationResult = await Notification.deleteMany({});
+      results.notifications.deleted = notificationResult.deletedCount;
+    }
+
+    // Clear pinned projects if requested
+    if (clearPinnedProjects === true) {
+      const pinnedResult = await UserPinnedProject.deleteMany({});
+      results.pinnedProjects.deleted = pinnedResult.deletedCount;
+    }
+
+    // If no flags were set, return error
+    if (!clearProjects && !clearNotifications && !clearPinnedProjects) {
+      return res.status(400).json({ 
+        message: "At least one clear option must be specified",
+        options: {
+          clearProjects: "Set to true to clear all projects",
+          clearNotifications: "Set to true to clear all notifications",
+          clearPinnedProjects: "Set to true to clear all pinned projects"
+        }
+      });
+    }
+
+    res.json({
+      message: "Bulk clear completed",
+      results
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};

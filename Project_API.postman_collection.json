@@ -240,6 +240,162 @@
 						"description": "Pin or unpin a project (requires authentication)"
 					},
 					"response": []
+				},
+				{
+					"name": "Bulk Clear - Clear All Projects",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clearProjects\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/bulk-clear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"bulk-clear"
+							]
+						},
+						"description": "Delete all projects from the database (requires authentication)"
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Clear - Clear All Notifications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clearNotifications\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/bulk-clear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"bulk-clear"
+							]
+						},
+						"description": "Delete all notifications from the database (requires authentication)"
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Clear - Clear All Pinned Projects",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clearPinnedProjects\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/bulk-clear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"bulk-clear"
+							]
+						},
+						"description": "Delete all pinned projects from the database (requires authentication)"
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Clear - Clear Everything",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clearProjects\": true,\n    \"clearNotifications\": true,\n    \"clearPinnedProjects\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/bulk-clear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"bulk-clear"
+							]
+						},
+						"description": "Delete all projects, notifications, and pinned projects from the database (requires authentication)"
+					},
+					"response": []
 				}
 			],
 			"description": "Project management endpoints"
